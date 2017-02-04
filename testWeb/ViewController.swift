@@ -59,6 +59,7 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
             if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN"{
                     print("HITT")
+                    webView.stringByEvaluatingJavaScript(from: "doSubmit('https://www.wnp12.waseda.jp/kyomu/epb2050.htm', 'eStudent', 'ea02', '1', '_self');")
             }
         }
     }
