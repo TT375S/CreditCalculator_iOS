@@ -8,18 +8,64 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UIWebViewDelegate  {
+    
+    let webView : UIWebView = UIWebView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Delegate設定
+        webView.delegate = self
+        
+        // Webページの大きさを画面に合わせる
+        let rect:CGRect = self.view.frame
+        webView.frame = rect
+        webView.scalesPageToFit = true
+        
+        // インスタンスをビューに追加する
+        self.view.addSubview(webView)
+        
+        // URLを指定
+        let url: URL = URL(string: "https://my.waseda.jp/login/login")!
+        let request: URLRequest = URLRequest(url: url)
+        
+        // リクエストを投げる
+        webView.loadRequest(request)
+        
+        var html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")
+        print(html as Any)
+        print("hello")
+        
+        html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")
+        print(html as Any)
     }
-
+    
+    
+    // ロード時にインジケータをまわす
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        print("indicator on")
+    }
+    
+    // ロード完了でインジケータ非表示
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        print("indicator off")
+        print("END")
+        if !webView.isLoading {
+            print(webView.stringByEvaluatingJavaScript(from: "document.URL") as Any)
+            self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
+            if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN"{
+                    print("HITT")
+            }
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-
