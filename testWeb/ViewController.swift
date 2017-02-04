@@ -59,7 +59,13 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
             if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN"{
                     print("HITT")
-                    webView.stringByEvaluatingJavaScript(from: "doSubmit('https://www.wnp12.waseda.jp/kyomu/epb2050.htm', 'eStudent', 'ea02', '1', '_self');")
+                
+                        webView.stringByEvaluatingJavaScript(from: "function doSubmit ( strURL, strAuthGp, strAuth, strStatus, strWindow ) {strWindow='_self';intRtnVal=fncControlSubmit ( 10 );if ( intRtnVal == true ){window.open( '','_self','menubar=no,status=yes,scrollbars=yes,location=no,resizable=yes' );document.F01.url.value=strURL;document.F01.HID_P6.value=strAuthGp;document.F01.HID_P8.value=strAuth;document.F01.target='ap';document.F01.pageflag.value=1000;document.F01.status.value=strStatus;document.F01.target='_self';document.F01.submit();} else {alert ( 'ただいま処理中です。OKボタンを押して、しばらく待ってから再度メニューをクリックしてください。' );}}")
+//                                        webView.stringByEvaluatingJavaScript(from: "function doSubmit( strURL, strAuthGp, strAuth, strStatus, strWindow ){strWindow = '_self';intRtnVal=fncControlSubmit ( 10 ); if ( intRtnVal == true ) {window.open ( '', strWindow, 'menubar=no,status=yes,scrollbars=yes,location=no,resizable=yes' );document.F01.url.value=strURL;document.F01.HID_P6.value=strAuthGp;document.F01.HID_P8.value=strAuth;document.F01.target='ap'document.F01.pageflag.value=1000;document.F01.status.value=strStatus;document.F01.target='_self';document.F01.submit();} else {alert ( 'ただいま処理中です。OKボタンを押して、しばらく待ってから再度メニューをクリックしてください。' );}}}")
+                
+                //とりあえずこの下のやつをやれば成績画面は出る。
+//                    webView.stringByEvaluatingJavaScript(from: "doSubmit('https://www.wnp12.waseda.jp/kyomu/epb2050.htm', 'eStudent', 'ea02', '1', '_self');")
+                
             }
         }
     }
