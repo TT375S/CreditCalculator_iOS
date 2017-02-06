@@ -30,6 +30,8 @@ class ResultViewController: UIViewController{
         uiLabel.text = recievedText
         print(recievedText)
         print("transp!")
+        
+        print(digestHTML())
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,23 +64,26 @@ class ResultViewController: UIViewController{
         }
         printText = printText + "合計:" + String(creditSum) + " (" + String(nonfinishedCreditSum) + ")単位\n"
         
+        return printText
+        
         for (key, value) in credit{
-            if key != "<BR>"{
+            if key != "<br>"{
                 printText = printText + key + " " + String(value) + "\n"
                 classNum = classNum + value
             }
         }
         
         printText = printText + "\n---成績計算---\n"
-        printText = printText +  "scoreSum " + String(GPA);
-        +"\n" + "class " + String(classNum - credit["＊"]) + "\n" + "GPA " + String(GPA/(classNum - credit["＊"]))
+        printText = printText +  "scoreSum " + String(GPA) + "\n"
+        printText = printText + "class " + String(classNum - credit["＊"]!) + "\n"
+        printText = printText  + "GPA " + String(GPA/(classNum - credit["＊"]!))
         
         
         return printText
     }
     
     //HTMLを解釈し計算する
-    func digestHTML(){
+    func digestHTML() -> String{
         var lines:[String] = disassemble(text: recievedText)
         
         var credits:Dictionary<String, Int>= [:]
@@ -88,26 +93,31 @@ class ResultViewController: UIViewController{
         var GPA:Int = 0
         
         for(index, element) in lines.enumerated(){
-            if element.contains("operationbox"){
+            if element.contains("operationboxf"){
                 var subIndex = index
                 subIndex = subIndex + 1
                 let currentHeadLine = lines[subIndex]
+                
                 if currentHeadLine.contains("群"){
                     currentGroup = currentHeadLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                     group[currentGroup] = 0
                     nonfinishedGroup[currentGroup] = 0
                     continue
-                }else if currentGroup != "NONEGROUP"{
-                    subIndex = subIndex + 4
+                }else if currentGroup != "NONEGROUP" && currentHeadLine.contains("nbsp"){
+                    subIndex = subIndex + 3
                     var currentLine = lines[subIndex]
                     //単位数
-                    let creditNum = Int(currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<TD>", with: "").replacingOccurrences(of: "</TD>", with: "").replacingOccurrences(of: "<BR>", with: "").replacingOccurrences(of: "＊", with: "") )
+                    let creditNum = Int(currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "").replacingOccurrences(of: "<br>", with: "").replacingOccurrences(of: "＊", with: "") )
+                    print(currentLine)
+                    print(currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "").replacingOccurrences(of: "<br>", with: "").replacingOccurrences(of: "＊", with: ""))
+                    print("CREDITNUM:")
+                    print(creditNum as Any)
                     subIndex = subIndex + 1
                     currentLine = lines[subIndex]
                     //成績評価
-                    let grade = element.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<TD>", with: "").replacingOccurrences(of: "</TD>", with: "")
+                    let grade = element.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "")
                     //単位数のカウント
-                    if grade != "＊" && grade != "<BR>"{
+                    if grade != "＊" && grade != "<br>"{
                         group[currentGroup] =  group[currentGroup]! + creditNum!
                     }else if grade == "＊" {
                         nonfinishedGroup[currentGroup] = nonfinishedGroup[currentGroup]! + creditNum!
@@ -115,7 +125,7 @@ class ResultViewController: UIViewController{
                     subIndex = subIndex + 1
                     currentLine = lines[subIndex]
                     //授業のスコア
-                    let score = Int(currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<TD>", with: "").replacingOccurrences(of: "</TD>", with: "").replacingOccurrences(of: "<BR>", with: "").replacingOccurrences(of: "＊", with: "") )
+                    let score = Int(currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "").replacingOccurrences(of: "<br>", with: "").replacingOccurrences(of: "＊", with: "") )
                     
                     GPA = GPA + score!
                     
@@ -128,7 +138,7 @@ class ResultViewController: UIViewController{
             }
         }
         
-        
+        return showResult(group: group, nonfinishedGroup: nonfinishedGroup, credit: credits, GPA: GPA)
     }
 }
 

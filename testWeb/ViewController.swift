@@ -74,7 +74,7 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             print(type(of: webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")!))
             
             //ログイン後の画面ならjavascriptのdoSubmit関数をオーバーライドして同じウィンドウ(?)で開く
-            if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN"{
+            if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN" || webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=JA"{
                 print("HITT")
                 
                 webView.stringByEvaluatingJavaScript(from: "function doSubmit ( strURL, strAuthGp, strAuth, strStatus, strWindow ) {strWindow='_self';intRtnVal=fncControlSubmit ( 10 );if ( intRtnVal == true ){window.open( '','_self','menubar=no,status=yes,scrollbars=yes,location=no,resizable=yes' );document.F01.url.value=strURL;document.F01.HID_P6.value=strAuthGp;document.F01.HID_P8.value=strAuth;document.F01.target='ap';document.F01.pageflag.value=1000;document.F01.status.value=strStatus;document.F01.target='_self';document.F01.submit();} else {alert ( 'ただいま処理中です。OKボタンを押して、しばらく待ってから再度メニューをクリックしてください。' );}}")
@@ -85,7 +85,7 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             }
             
             //成績表示画面に到達したらhtmlソースを渡して画面遷移
-            if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://www.wnp12.waseda.jp/kyomu/epb2051e.htm"{
+            if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://www.wnp12.waseda.jp/kyomu/epb2051e.htm" || webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://www.wnp12.waseda.jp/kyomu/epb2051.htm"{
 //                let storyboard = self.storyboard!
 //                let resultView = storyboard.instantiateViewController(withIdentifier: "result")
 //                self.present(resultView, animated: true, completion: nil)
