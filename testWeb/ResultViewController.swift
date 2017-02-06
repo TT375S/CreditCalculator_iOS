@@ -58,7 +58,9 @@ class ResultViewController: UIViewController{
         
         printText = printText + "---群別の単位数(カッコ内は履修はしているもののまだ成績が決定されていないもの)---" + "\n"
         for (key, value) in group{
-            printText = printText + key + " : " + String(value) + " (" + String( describing: nonfinishedGroup[key] ) + ")\n"
+            let temp = Int(nonfinishedGroup[key]!)
+            printText = printText + key + " : "  + String(value)
+            printText = printText  + " (" + String(temp) + ")\n"
             creditSum = creditSum + value
             nonfinishedCreditSum = nonfinishedCreditSum + nonfinishedGroup[key]!
         }
@@ -99,7 +101,8 @@ class ResultViewController: UIViewController{
                 let currentHeadLine = lines[subIndex]
                 
                 if currentHeadLine.contains("群"){
-                    currentGroup = currentHeadLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    currentGroup = currentHeadLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "").replacingOccurrences(of: "<br>", with: "").replacingOccurrences(of: "＊", with: "").replacingOccurrences(of: "◎", with: "")
+                    
                     group[currentGroup] = 0
                     nonfinishedGroup[currentGroup] = 0
                     continue
