@@ -30,8 +30,8 @@ class ResultViewController: UIViewController{
         uiLabel.text = recievedText
         print(recievedText)
         print("transp!")
-        
-        print(digestHTML())
+        uiLabel.text = digestHTML()
+        //print(digestHTML())
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,13 +58,14 @@ class ResultViewController: UIViewController{
         
         printText = printText + "---群別の単位数(カッコ内は履修はしているもののまだ成績が決定されていないもの)---" + "\n"
         for (key, value) in group{
+            //一行を長くしすぎるとtoo complexとか言われ、さらにinitはdescribingに名前が変わったとか変な警告が出るので一旦IntにしてStringにしている
             let temp = Int(nonfinishedGroup[key]!)
             printText = printText + key + " : "  + String(value)
             printText = printText  + " (" + String(temp) + ")\n"
             creditSum = creditSum + value
             nonfinishedCreditSum = nonfinishedCreditSum + nonfinishedGroup[key]!
         }
-        printText = printText + "合計:" + String(creditSum) + " (" + String(nonfinishedCreditSum) + ")単位\n"
+        printText = printText + "合計:" + String(creditSum) + " (" + String(nonfinishedCreditSum) + ")単位\n\n"
         
         //return printText
         
@@ -77,8 +78,9 @@ class ResultViewController: UIViewController{
         
         printText = printText + "\n---成績計算---\n"
         printText = printText +  "scoreSum " + String(GPA) + "\n"
-        printText = printText + "class " + String(classNum - credit["＊"]!) + "\n"
-        printText = printText  + "GPA " + String(GPA/(classNum - credit["＊"]!))
+        printText = printText + "class " + String(classNum) + "\n"
+        printText = printText + "finishedClass " + String(classNum - credit["＊"]!) + "\n"
+        printText = printText  + "GPA " + String(Double(GPA)/Double(classNum - credit["＊"]!)) + "\n"
         
         
         return printText
@@ -88,7 +90,7 @@ class ResultViewController: UIViewController{
     func digestHTML() -> String{
         var lines:[String] = disassemble(text: recievedText)
         
-        var credits:Dictionary<String, Int>= [:]
+        var credits:Dictionary<String, Int>= ["A+":0, "A":0, "B":0, "C":0, "F":0, "G":0, "H":0]
         var group:Dictionary<String, Int> = [:]
         var nonfinishedGroup:Dictionary<String, Int>=[:]
         var currentGroup = "NONEGROUP"
