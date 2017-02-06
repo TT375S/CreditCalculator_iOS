@@ -18,6 +18,8 @@ import UIKit
 
 class ResultViewController: UIViewController{
     
+    var recievedText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

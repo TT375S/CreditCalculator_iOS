@@ -22,14 +22,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="3H9-Xo-D0s" kind="show" identifier="goResult" id="Urv-mM-A7J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1698" y="37"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="adV-uh-ISv">
             <objects>
-                <viewController storyboardIdentifier="result" id="3H9-Xo-D0s" customClass="ResultViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="result" id="3H9-Xo-D0s" customClass="ResultViewController" customModule="testWeb" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BWa-vh-uAP"/>
                         <viewControllerLayoutGuide type="bottom" id="C01-O1-TvJ"/>
@@ -39,10 +43,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ORl-p5-QNb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Dj-9J-39r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810" y="38"/>
+            <point key="canvasLocation" x="2681" y="36"/>
         </scene>
     </scenes>
 </document>
