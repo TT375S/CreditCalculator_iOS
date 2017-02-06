@@ -64,7 +64,7 @@ class ResultViewController: UIViewController{
         }
         printText = printText + "合計:" + String(creditSum) + " (" + String(nonfinishedCreditSum) + ")単位\n"
         
-        return printText
+        //return printText
         
         for (key, value) in credit{
             if key != "<br>"{
@@ -115,7 +115,9 @@ class ResultViewController: UIViewController{
                     subIndex = subIndex + 1
                     currentLine = lines[subIndex]
                     //成績評価
-                    let grade = element.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "")
+                    let grade = currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "")
+                    print("GRADE")
+                    print(grade)
                     //単位数のカウント
                     if grade != "＊" && grade != "<br>"{
                         group[currentGroup] =  group[currentGroup]! + creditNum!
