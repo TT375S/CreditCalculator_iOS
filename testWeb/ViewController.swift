@@ -49,10 +49,12 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             print(type(of: segue.destination))
             let resultViewController:ResultViewController = segue.destination as! ResultViewController
             //let resultViewController = segue.destination as! ResultViewController
-            resultViewController.recievedText = "aho!"
+            resultViewController.recievedText = self.html
+            print("prepared!")
         }
     }
     
+    var html = "defaultHTML"
     // ロード完了
     func webViewDidFinishLoad(_ webView: UIWebView) {
         //インジケータ非表示
@@ -66,8 +68,10 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             //タイトルをナビゲーションのタイトルにする
             self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
             //htmlソースを表示
-            var html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")
+            self.html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")!
+            
             //print(html as Any)
+            print(type(of: webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")!))
             
             //ログイン後の画面ならjavascriptのdoSubmit関数をオーバーライドして同じウィンドウ(?)で開く
             if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN"{

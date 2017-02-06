@@ -20,9 +20,16 @@ class ResultViewController: UIViewController{
     
     var recievedText = ""
     
+    @IBOutlet weak var uiLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        uiLabel.numberOfLines = 0
+        uiLabel.adjustsFontSizeToFitWidth = true
+        uiLabel.text = "honyahonya"
+        uiLabel.text = recievedText
+        print(recievedText)
+        print("transp!")
     }
     
     override func didReceiveMemoryWarning() {
