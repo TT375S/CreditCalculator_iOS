@@ -47,6 +47,36 @@ class ResultViewController: UIViewController{
         return lines
     }
     
+    //表示
+    func showResult(group :Dictionary<String,Int>, nonfinishedGroup :Dictionary<String, Int>, credit :Dictionary<String, Int>, GPA:Int) -> String{
+        var printText :String = ""
+        var creditSum = 0
+        var nonfinishedCreditSum = 0
+        var classNum = 0
+        
+        printText = printText + "---群別の単位数(カッコ内は履修はしているもののまだ成績が決定されていないもの)---" + "\n"
+        for (key, value) in group{
+            printText = printText + key + " : " + String(value) + " (" + String( describing: nonfinishedGroup[key] ) + ")\n"
+            creditSum = creditSum + value
+            nonfinishedCreditSum = nonfinishedCreditSum + nonfinishedGroup[key]!
+        }
+        printText = printText + "合計:" + String(creditSum) + " (" + String(nonfinishedCreditSum) + ")単位\n"
+        
+        for (key, value) in credit{
+            if key != "<BR>"{
+                printText = printText + key + " " + String(value) + "\n"
+                classNum = classNum + value
+            }
+        }
+        
+        printText = printText + "\n---成績計算---\n"
+        printText = printText +  "scoreSum " + String(GPA);
+        +"\n" + "class " + String(classNum - credit["＊"]) + "\n" + "GPA " + String(GPA/(classNum - credit["＊"]))
+        
+        
+        return printText
+    }
+    
     //HTMLを解釈し計算する
     func digestHTML(){
         var lines:[String] = disassemble(text: recievedText)
@@ -56,7 +86,6 @@ class ResultViewController: UIViewController{
         var nonfinishedGroup:Dictionary<String, Int>=[:]
         var currentGroup = "NONEGROUP"
         var GPA:Int = 0
-        var classNum:Int = 0
         
         for(index, element) in lines.enumerated(){
             if element.contains("operationbox"){
