@@ -56,8 +56,8 @@ class ViewController: UIViewController, UIWebViewDelegate  {
             self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
             //htmlソースを表示
             var html = webView.stringByEvaluatingJavaScript(from: "document.body.innerHTML")
-            print(html as Any)
-            print("hello")
+            //print(html as Any)
+
             //ログイン後の画面ならjavascriptのdoSubmit関数をオーバーライドして同じウィンドウ(?)で開く
             if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://coursereg.waseda.jp/portal/simpleportal.php?HID_P14=EN"{
                     print("HITT")
@@ -67,6 +67,13 @@ class ViewController: UIViewController, UIWebViewDelegate  {
                 //とりあえずこの下のやつをやれば成績画面は出る。
 //                    webView.stringByEvaluatingJavaScript(from: "doSubmit('https://www.wnp12.waseda.jp/kyomu/epb2050.htm', 'eStudent', 'ea02', '1', '_self');")
                 
+            }
+            
+            //成績表示画面に到達したらhtmlソースを渡して画面遷移
+            if webView.stringByEvaluatingJavaScript(from: "document.URL") == "https://www.wnp12.waseda.jp/kyomu/epb2051e.htm"{
+                let storyboard = self.storyboard!
+                let resultView = storyboard.instantiateViewController(withIdentifier: "result")
+                self.present(resultView, animated: true, completion: nil)
             }
         }
     }

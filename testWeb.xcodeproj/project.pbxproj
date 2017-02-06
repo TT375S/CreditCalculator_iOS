@@ -12,6 +12,7 @@
 		7FC20A5B1E459A7B00207F7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC20A591E459A7B00207F7E /* Main.storyboard */; };
 		7FC20A5D1E459A7B00207F7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FC20A5C1E459A7B00207F7E /* Assets.xcassets */; };
 		7FC20A601E459A7B00207F7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC20A5E1E459A7B00207F7E /* LaunchScreen.storyboard */; };
+		7FC40BD31E481167004D99BC /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC40BD21E481167004D99BC /* ResultViewController.swift */; };
 		7FE1E2551E4643B7001900D2 /* jsDoSubmitOverwrite.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7FE1E2541E4643B7001900D2 /* jsDoSubmitOverwrite.txt */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		7FC20A5C1E459A7B00207F7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FC20A5F1E459A7B00207F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FC20A611E459A7B00207F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FC40BD21E481167004D99BC /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		7FE1E2541E4643B7001900D2 /* jsDoSubmitOverwrite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jsDoSubmitOverwrite.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +61,7 @@
 				7FC20A551E459A7B00207F7E /* AppDelegate.swift */,
 				7FC20A571E459A7B00207F7E /* ViewController.swift */,
 				7FC20A591E459A7B00207F7E /* Main.storyboard */,
+				7FC40BD21E481167004D99BC /* ResultViewController.swift */,
 				7FC20A5C1E459A7B00207F7E /* Assets.xcassets */,
 				7FC20A5E1E459A7B00207F7E /* LaunchScreen.storyboard */,
 				7FC20A611E459A7B00207F7E /* Info.plist */,
@@ -142,6 +145,7 @@
 			files = (
 				7FC20A581E459A7B00207F7E /* ViewController.swift in Sources */,
 				7FC20A561E459A7B00207F7E /* AppDelegate.swift in Sources */,
+				7FC40BD31E481167004D99BC /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
