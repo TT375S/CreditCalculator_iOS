@@ -126,8 +126,12 @@ class ResultViewController: UIViewController{
                     currentLine = lines[subIndex]
                     //授業のスコア
                     let score = Int(currentLine.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "<td>", with: "").replacingOccurrences(of: "</td>", with: "").replacingOccurrences(of: "<br>", with: "").replacingOccurrences(of: "＊", with: "") )
-                    
-                    GPA = GPA + score!
+                    print("SCORE")
+                    print(currentLine)
+                    print(score as Any)
+                    if score != nil{
+                        GPA = GPA + score!
+                    }
                     
                     if let _ = credits[grade]{
                         credits[grade] = credits[grade]! + 1
